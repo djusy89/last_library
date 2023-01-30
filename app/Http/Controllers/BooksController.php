@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use App\Genre;
-use Illuminate\Http\Request;;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+use Symfony\Component\Console\Input\Input;
+
+;
 
 class BooksController extends Controller
 {
@@ -17,21 +22,25 @@ class BooksController extends Controller
         return view('book.index', compact('books', 'genres', 'book'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        Book::create($this->validatedData());
+        Book::create($request->input());
+
+//        return Redirect::back()->withInput(Input::all()); // if have exception, return with all old input
 
         return redirect()->back();
     }
 
     public function show(Book $book)
     {
-        return view('book.show', compact('book'));
+        return view('book', compact('book'));
     }
 
-    public function edit(Book $book)
+    public function edit()
     {
+        $book = Book::findOrFail(request()->input('id'));
         $book->update($this->validatedData());
+//        dd($book->validatedData());
 
         return redirect('/books');
 
@@ -46,6 +55,7 @@ class BooksController extends Controller
 
     protected function validatedData()
     {
+//        dd(request());
         return request()->validate([
             'title' => 'required|min:5',
             'author' => 'required',

@@ -1,4 +1,9 @@
 <div class="container">
+    @if ($errors->any())
+        <script>
+            $('#myEditModal').modal("show");
+        </script>
+    @endif
     <h2>BOOKS</h2><hr>
     <table class="table table-striped js_books_table">
         <thead class="thead-dark">
@@ -16,7 +21,8 @@
         @if(empty($message))
         @foreach($books as $book)
             <tr>
-                <td><a href="/books/{{ $book->id }}">{{ $book->title }}</a></td>
+                <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myShowModal{{ $book->id }}">{{ $book->title }}</button></td>
+{{--                <td role="button" data-bs-target=".show-info" data-bs-toggle="modal{{$book->id}}" data-href="{{route('book.show', $book->id)}}">{{ $book->title }}</td>--}}
                 <td>{{ $book->author }}</td>
                 <td>{{ $book->genre->name }}</td>
                 <td>{{ $book->date_written }}</td>
@@ -28,6 +34,7 @@
                         @csrf
                         <button class="btn btn-danger">Delete</button>
                     </form>
+                    @include('book.show')
                 </td>
             <tr>
         @endforeach

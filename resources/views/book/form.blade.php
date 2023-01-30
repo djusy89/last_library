@@ -1,3 +1,4 @@
+<input type="hidden" value="{{$book->id}}" name="id">
 <div class="form-group">
     <label for="tit">Title:</label>
     <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? $book->title }}">

@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
-Route::get('/books', 'BooksController@index');
-Route::post('/books', 'BooksController@store');
-Route::get('/books/{book}', 'BooksController@show');
-Route::patch('/books/{book}', 'BooksController@edit');
-Route::delete('/books/{book}', 'BooksController@destroy');
-Route::get('/books', 'BooksController@search')->name('search');
+Route::get('books', 'BooksController@index');
+Route::get('books/{book}', 'BooksController@show');
+Route::post('book', 'BooksController@store');
+Route::patch('books/edit/{book}', 'BooksController@edit');
+Route::delete('books/{book}', 'BooksController@destroy');
+Route::get('books', 'BooksController@search')->name('search');
 

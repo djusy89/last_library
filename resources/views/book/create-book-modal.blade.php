@@ -17,7 +17,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form method="post" class="js_new_book_form">
+                    <form action="/book" method="post" class="js_new_book_form">
                         @include('book.form')
                         <input type="submit" class="btn btn-primary js_submit_new_book" value="Submit">
                     </form>
